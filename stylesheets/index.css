@@ -175,3 +175,7 @@ section.ui.grid:last-of-type{
 section:first-of-type {
   margin: 80px 0;
 }
+
+.ui.segment:last-child {
+  margin-bottom: 0;
+}
