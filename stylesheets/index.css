@@ -1,0 +1,177 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #2b2b2b;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+}
+
+.menu i.fa {
+  margin-right: 0.75em;
+}
+
+#logo {
+  font-weight: bold;
+  font-size: 1.25rem;
+  font-family: 'Droid Sans', sans-serif;
+}
+
+#container {
+  min-height: 100%;
+  margin-bottom: -100px;
+  position: relative;
+}
+
+
+.clearfooter {
+  height: 50px;
+  clear: both;
+}
+
+footer {
+  width: 100%;
+  text-align: left;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+footer .item{
+  padding: 5px;
+}
+
+footer .heading{
+  font-size: 1.25rem;
+}
+
+
+.header-img {
+  background:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+               url("../images/tim-marshall-114623-med.jpg");
+  background-position: center;
+  width: 100%;
+  background-size: cover;
+  height: 70vh;
+  margin: 0;
+  overflow: hidden;
+}
+.header-img .container {
+  position: relative;
+}
+
+.header-img .content {
+  position: absolute;
+  top: 6vh;
+  left: 80px;
+}
+
+.header-img h2 {
+  font-size: 64px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.header-img p {
+  font-size: 24px;
+  max-width: 500px;
+}
+
+#header-main-img {
+  width: 100%;
+  object-fit: cover;
+  object-position: 0% 60%;
+  height: 70vh;
+  opacity: 1;
+  -webkit-filter: brightness(80%); /* Safari 6.0 - 9.0 */
+  filter: brightness(80%);
+}
+
+hr.double-line {
+	border-top: 1px solid #8c8b8b;
+	border-bottom: 1px solid #fff;
+}
+hr.double-line:after {
+	content: '';
+	display: block;
+	margin-top: 2px;
+	border-top: 1px solid #8c8b8b;
+	border-bottom: 1px solid #fff;
+}
+
+.main {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.main h2{
+ overflow: hidden;
+ text-align: center;
+ text-transform: uppercase;
+ letter-spacing: 0.3em;
+}
+.main h2:before,
+.main h2:after {
+ background-color: #999;
+ content: "";
+ display: inline-block;
+ height: 1px;
+ position: relative;
+ vertical-align: middle;
+ width: 50%;
+}
+.main h2:before {
+ right: 0.5em;
+ margin-left: -50%;
+}
+.main h2:after {
+ left: 0.5em;
+ margin-right: -50%;
+}
+
+.main section {
+  margin: 40px 0;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+
+
+.main section p {
+  text-align: center;
+}
+
+.main section img {
+  width: 100%;
+}
+
+.main section .text {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.text .description {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+top: 50%;
+transform: translateY(-50%);
+}
+
+footer {
+  margin-top: 30px;
+}
+
+section.ui.grid:last-of-type{
+  margin-bottom: 100px;
+}
+
+section:first-of-type {
+  margin: 80px 0;
+}
