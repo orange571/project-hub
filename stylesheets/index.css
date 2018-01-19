@@ -68,17 +68,16 @@ footer .heading{
 .header-img .content {
   position: absolute;
   top: 6vh;
-  left: 80px;
 }
 
 .header-img h2 {
-  font-size: 64px;
+  font-size: 4.5rem;
   color: #fff;
   font-weight: bold;
 }
 
 .header-img p {
-  font-size: 24px;
+  font-size: 1.7rem;
   max-width: 500px;
 }
 
@@ -178,4 +177,44 @@ section:first-of-type {
 
 .ui.segment:last-child {
   margin-bottom: 0;
+}
+
+
+@media (min-width: 700px) {
+  .header-img .content {
+    left: 80px;
+  }
+}
+
+@media (max-width: 700px){
+
+
+  .header-img .content {
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .header-img h2 {
+    font-size: 3rem;
+  }
+
+  .header-img p {
+    font-size: 1.7rem;
+    margin: 10px auto;
+  }
+
+  .header-img .ui.massive.button {
+    font-size: 1.3rem;
+  }
+
+  #header-main-img {
+    width: 100%;
+    object-fit: cover;
+    object-position: 55% 60%;
+    height: 70vh;
+    opacity: 1;
+    -webkit-filter: brightness(80%); /* Safari 6.0 - 9.0 */
+    filter: brightness(80%);
+  }
 }
