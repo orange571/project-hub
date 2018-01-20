@@ -261,3 +261,8 @@ section:first-of-type {
   position: relative;
   border-bottom: 1px solid #2b2b2b;
 }
+
+
+form {
+  color: #000;
+}

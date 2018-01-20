@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Project Hub</title>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
+    <script src="https://use.fontawesome.com/d7de585d6e.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>-->
+  </head>
+  <body>
+    <div id="container">
+      <div class="ui small attached inverted stackable menu nav" id="desktop-nav">
+        <div class="ui container">
+          <a class="item" id="logo" href="index.html">
+            PROJECT HUB
+          </a>
+          <a class="item" href="index.html">
+            <i class="home icon"></i> Home
+          </a>
+          <a class="item">
+            <i class="info circle icon"></i> About Us
+          </a>
+          <a class="item">
+            <i class="map outline icon"></i> Locations
+          </a>
+          <div class="ui simple dropdown item">
+            More
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <a class="item"><i class="fa fa-heart" aria-hidden="true"></i> Donate</a>
+              <a class="item"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Blog</a>
+              <a class="item"><i class="fa fa-envelope-o"></i> Contact Us</a>
+            </div>
+          </div>
+          <div class="right menu">
+            <div class="item">
+                 <a class="mini ui inverted blue button" href="register/">Sign Up</a>
+             </div>
+             <div class="item">
+                  <a class="ui mini inverted green button" href="login/">Log In</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui small attached inverted stackable menu nav" id="mobile-nav">
+        <div class="ui container">
+          <div class="top-nav">
+            <div id="logo-container"><a id="logo" href="index.html">PROJECT HUB</a></div>
+            <div class="nav-buttons">
+              <a class="mini ui inverted blue button" href="register/">Sign Up</a>
+              <a class="ui mini inverted green button" href="login/">Log In</a>
+            </div>
+          </div>
+          <div class="item"><i class="sidebar icon"></i><span id="sandwich-msg">More</span></div>
+          <div class="menu">
+            <a class="item"><i class="info circle icon"></i> About Us</a>
+            <a class="item"><i class="map outline icon"></i> Locations</a>
+            <a class="item"><i class="fa fa-heart" aria-hidden="true"></i> Donate</a>
+            <a class="item"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Blog</a>
+            <a class="item"><i class="fa fa-envelope-o"></i> Contact Us</a>
+          </div>
+          </div>
+      </div>
+      <div class="ui container main">
+    
+    <div class="container">
+        
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+    
