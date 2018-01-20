@@ -17,6 +17,7 @@ body {
   font-weight: bold;
   font-size: 1.25rem;
   font-family: 'Droid Sans', sans-serif;
+  color: #fff;
 }
 
 #container {
@@ -180,13 +181,21 @@ section:first-of-type {
 }
 
 
-@media (min-width: 700px) {
+@media (min-width: 767px) {
   .header-img .content {
     left: 80px;
   }
+
+  #mobile-nav {
+    display: none;
+  }
+
+  #desktop-nav {
+    display: block;
+  }
 }
 
-@media (max-width: 700px){
+@media (max-width: 767px){
 
 
   .header-img .content {
@@ -217,4 +226,35 @@ section:first-of-type {
     -webkit-filter: brightness(80%); /* Safari 6.0 - 9.0 */
     filter: brightness(80%);
   }
+
+  #mobile-nav {
+    display: block;
+  }
+
+  #mobile-nav .menu {
+    display: none;
+  }
+
+  #desktop-nav {
+    display: none;
+  }
+}
+
+#logo-container{
+    padding: 1.14em 0.9em;
+    float: left;
+    margin: auto 0;
+}
+
+.nav-buttons {
+  float:right;
+  padding: 0 0.9em;
+  margin-top: 9px;
+}
+
+.top-nav{
+  line-height: 1;
+  vertical-align: middle;
+  position: relative;
+  border-bottom: 1px solid #2b2b2b;
 }
