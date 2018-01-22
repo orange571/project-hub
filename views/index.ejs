@@ -1,95 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Project Hub</title>
-    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
-    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
-    <script src="https://use.fontawesome.com/d7de585d6e.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>-->
-  </head>
-  <body>
-    <div id="container">
-      <div class="ui small attached inverted stackable menu nav" id="desktop-nav">
-        <div class="ui container">
-          <a class="item" id="logo" href="index.html">
-            PROJECT HUB
-          </a>
-          <a class="item" href="index.html">
-            <i class="home icon"></i> Home
-          </a>
-          <a class="item">
-            <i class="info circle icon"></i> About Us
-          </a>
-          <a class="item">
-            <i class="map outline icon"></i> Locations
-          </a>
-          <div class="ui simple dropdown item">
-            More
-            <i class="dropdown icon"></i>
-            <div class="menu">
-              <a class="item"><i class="fa fa-heart" aria-hidden="true"></i> Donate</a>
-              <a class="item"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Blog</a>
-              <a class="item"><i class="fa fa-envelope-o"></i> Contact Us</a>
-            </div>
-          </div>
-          <div class="right menu">
-            <% if(!currentUser){ %>
-                <div class="item">
-                     <a class="mini ui inverted blue button" href="register/">Sign Up</a>
-                 </div>
-                 <div class="item">
-                      <a class="ui mini inverted green button" href="login/">Log In</a>
-                </div>
-            <% } else { %>
-                <div class="item">Signed In As <%= currentUser.username %></div>
-                <div class="item">
-                  <a class="ui mini inverted green button" href="logout/">Log Out</a>
-                </div>
-            <% } %>
-          </div>
+<% include ./partials/header %> 
+  <div id="container">
+    <% include ./partials/nav_bar %>
+    <% include ./partials/error_alert %>
+    <div class="header-img">
+      <div class="ui container">
+        <img class="ui centered image" id="header-main-img"src="public/images/tim-marshall-114623-med.jpg">
+        <div class="content">
+          <h2>Let's build a community</h2>
+          <p>Join us in a movement to change the way see our neighborhoods</p>
+          <button class="ui massive primary button">Get Started</button>
         </div>
       </div>
-      <div class="ui small attached inverted stackable menu nav" id="mobile-nav">
-        <div class="ui container">
-          <div class="top-nav">
-            <div id="logo-container"><a id="logo" href="index.html">PROJECT HUB</a></div>
-            <div class="nav-buttons">
-              <% if(!currentUser){ %>      
-                <a class="mini ui inverted blue button" href="register/">Sign Up</a>
-                <a class="ui mini inverted green button" href="login/">Log In</a>
-              <% } else { %>
-                <span>Signed In As <%= currentUser.username %></span>
-                <a class="ui mini inverted green button" href="logout/">Log Out</a>
-              <% } %>
-            </div>
-          </div>
-          <div class="item"><i class="sidebar icon"></i><span id="sandwich-msg">More</span></div>
-          <div class="menu">
-            <a class="item"><i class="info circle icon"></i> About Us</a>
-            <a class="item"><i class="map outline icon"></i> Locations</a>
-            <a class="item"><i class="fa fa-heart" aria-hidden="true"></i> Donate</a>
-            <a class="item"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Blog</a>
-            <a class="item"><i class="fa fa-envelope-o"></i> Contact Us</a>
-          </div>
-          </div>
-      </div>
-      <div class="header-img">
-        <div class="ui container">
-          <img class="ui centered image" id="header-main-img"src="images/tim-marshall-114623-med.jpg">
-          <div class="content">
-            <h2>Let's build a community</h2>
-            <p>Join us in a movement to change the way see our neighborhoods</p>
-            <button class="ui massive primary button">Get Started</button>
-          </div>
-
-        </div>
-      </div>
-      <div class="ui container main">
+    </div>
+    <div class="ui container main">
         <section>
           <h2>Mission</h2>
           <p>
@@ -133,46 +56,6 @@
           </div>
         </section>
     </div>
-      <div class="clearfooter"></div>
-    </div>
-    <footer class="ui inverted footer basic segment">
-      <div class="ui container">
-        <div class="ui stackable three column grid">
-          <div class="column">
-            <div class="item"><a href="about.html">About</a></div>
-            <div class="item"><a href="#">Locations</a></div>
-            <div class="item"><a href="#">Latest News</a></div>
-            <div class="item"><a href="#">Privacy &amp; Cookies</a></div>
-            <div class="item"><a href="#">Terms &amp; Conditions</a></div>
-          </div>
-          <div class="column">
-            <a href="contact.html" class="heading">Contact Us</a>
-            <address class="item">
-              123 Address Way<br>
-              City, State<br>
-              Zip Code<br>
-              email@email.com<br>
-              1-123-456-7890
-            </address>
-          </div>
-          <div class="column">
-            <div class="item heading">Get Connected</div>
-            <div class="item"><a href="#"><i class="facebook icon"></i>Facebook</a></div>
-            <div class="item"><a href="#"><i class="twitter icon"></i>Twitter</a></div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <script>
-    $( ".sidebar" ).parent().click(function() {
-      $( "#mobile-nav .menu" ).slideToggle( "fast", function(){
-        if(this.style.display === "none") {
-          $("#sandwich-msg").text("More");
-        } else {
-          $("#sandwich-msg").text("Close");
-        }
-      } );
-    });
-    </script>
-  </body>
-</html>
+    <div class="clearfooter"></div>
+  </div>
+<% include ./partials/footer %>

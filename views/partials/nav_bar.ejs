@@ -1,0 +1,64 @@
+      <div class="ui small attached inverted stackable menu nav" id="desktop-nav">
+        <div class="ui container">
+          <a class="item" id="logo" href="index.html">
+            PROJECT HUB
+          </a>
+          <a class="item" href="index.html">
+            <i class="home icon"></i> Home
+          </a>
+          <a class="item">
+            <i class="info circle icon"></i> About Us
+          </a>
+          <a class="item">
+            <i class="map outline icon"></i> Locations
+          </a>
+          <div class="ui simple dropdown item">
+            More
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <a class="item"><i class="fa fa-heart" aria-hidden="true"></i> Donate</a>
+              <a class="item"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Blog</a>
+              <a class="item"><i class="fa fa-envelope-o"></i> Contact Us</a>
+            </div>
+          </div>
+           <div class="right menu">
+            <% if(!currentUser){ %>
+                <div class="item">
+                     <a class="mini ui inverted blue button" href="register/">Sign Up</a>
+                 </div>
+                 <div class="item">
+                      <a class="ui mini inverted green button" href="login/">Log In</a>
+                </div>
+            <% } else { %>
+                <div class="item">Signed In As <%= currentUser.username %></div>
+                <div class="item">
+                  <a class="ui mini inverted green button" href="logout/">Log Out</a>
+                </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <div class="ui small attached inverted stackable menu nav" id="mobile-nav">
+        <div class="ui container">
+          <div class="top-nav">
+            <div id="logo-container"><a id="logo" href="index.html">PROJECT HUB</a></div>
+             <div class="nav-buttons">
+              <% if(!currentUser){ %>      
+                <a class="mini ui inverted blue button" href="register/">Sign Up</a>
+                <a class="ui mini inverted green button" href="login/">Log In</a>
+              <% } else { %>
+                <span>Signed In As <%= currentUser.username %></span>
+                <a class="ui mini inverted green button" href="logout/">Log Out</a>
+              <% } %>
+            </div>
+          </div>
+          <div class="item"><i class="sidebar icon"></i><span id="sandwich-msg">More</span></div>
+          <div class="menu">
+            <a class="item"><i class="info circle icon"></i> About Us</a>
+            <a class="item"><i class="map outline icon"></i> Locations</a>
+            <a class="item"><i class="fa fa-heart" aria-hidden="true"></i> Donate</a>
+            <a class="item"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Blog</a>
+            <a class="item"><i class="fa fa-envelope-o"></i> Contact Us</a>
+          </div>
+          </div>
+      </div>
