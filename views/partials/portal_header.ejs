@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Project Hub Portal</title>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
+    <link href="/stylesheets/portal.css" rel="stylesheet" type="text/css" />
+    <script src="https://use.fontawesome.com/d7de585d6e.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>-->
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li id="logo_container">
+            <a href="/" id="logo">Project<br><span>Hub</span></a>
+          </li>
+          <li>
+            <a href="/profile" class="active">
+              <div class="icon_container">
+                <i class="user circle icon"></i>
+                <div class="icon_text">Profile</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard">
+              <div class="icon_container">
+                <i class="dashboard icon"></i>
+                <div class="icon_text">Dashboard</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="/annoucements">
+              <div class="icon_container">
+                <i class="announcement icon"></i>
+                <div class="icon_text">News</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="/library">
+              <div class="icon_container">
+                <i class="archive icon"></i>
+                <div class="icon_text">Library</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="/calendar">
+              <div class="icon_container">
+                <i class="calendar icon"></i>
+                <div class="icon_text">Calendar</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="/info">
+              <div class="icon_container">
+                <i class="info circle icon"></i>
+                <div class="icon_text">Info</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="portal_logout_container">
+              <div>
+                <% if(!currentUser){ %>
+                    You are not signed in
+                <% } else { %>
+                    Signed In As <span><%= currentUser.username %></span>
+                <% } %>
+              </div>
+              <a class="ui mini inverted white button" href="logout/">Log Out</a>
+            </div>
+          </li>
+          <li>
+            <a href="#">
+              <div>
+                <i class="arrow circle left icon"></i>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>

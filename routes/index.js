@@ -13,6 +13,27 @@ router.get("/register", function(req, res){
    res.render("register"); 
 });
 
+router.get("/profile", function(req, res){
+    console.log("showing profile page for" + res.locals.currentUser._id + " " + res.locals.currentUser.username);
+   console.log("picture is " + res.locals.currentUser.picture);
+   res.render("profile"); 
+});
+
+router.put("/profile", function(req, res){
+    console.log("put request to profile recieved");
+    console.log("new picture res.body.img_url");
+    // find and update the correct campground
+    User.findByIdAndUpdate(res.locals.currentUser._id,{picture: req.body.img_url}, function(err, updatedProfile){
+       if(err){
+           res.redirect("/profile");
+       } else {
+           //redirect somewhere(show page)
+           res.redirect("/profile");
+       }
+    });
+});
+
+
 //handle sign up logic
 router.post("/register", function(req, res){
     var newUser = new User({username: req.body.username});
@@ -36,7 +57,7 @@ router.get("/login", function(req, res){
 //handling login logic
 router.post("/login", passport.authenticate("local", 
     {
-        successRedirect: "/",
+        successRedirect: "/profile",
         failureRedirect: "/login"
     }), function(req, res){
 });
