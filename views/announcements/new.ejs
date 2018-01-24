@@ -1,22 +1,19 @@
-<% include ../partials/header %>
-<div class="container">
-    <div class="row">
-        <h1 style="text-align: center">Create a New Annoucement</h1>
-        <div style="width: 30%; margin: 25px auto;">
-            <form action="/annoucements" method="POST">
+<% include ../partials/portal_header %>
+      <div class="ui container main" id="content">
+        <h1>Announcements-Create New</h1>
+        <section>
+           <form action="/announcements" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="name" placeholder="name">
+                    <input class="form-control" type="text" name="title" placeholder="Title">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="description" placeholder="description">
+                    <textarea name="post_body" placeholder="Enter text here"></textarea>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                    <button class="ui mini inverted green button">Submit!</button>
                 </div>
             </form>
-            <a href="/annoucements">Go Back</a>
-        </div>
-    </div>
-</div>
-<% include ../partials/footer %>
-
+            <a href="/announcements">Go Back</a>
+        </section>
+      </div>
+<% include ../partials/portal_footer %>

@@ -1,29 +1,29 @@
 var express = require("express");
 var router  = express.Router({mergeParams: true});
-var annoucement = require("../models/annoucement");
+var Announcement = require("../models/announcement");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
 //Comments New
 router.get("/new",middleware.isLoggedIn, function(req, res){
-    // find annoucement by id
+    // find announcement by id
     console.log(req.params.id);
-    annoucement.findById(req.params.id, function(err, annoucement){
+    Announcement.findById(req.params.id, function(err, announcement){
         if(err){
             console.log(err);
         } else {
-             res.render("comments/new", {annoucement: annoucement});
+             res.render("comments/new", {announcement: announcement});
         }
     })
 });
 
 //Comments Create
 router.post("/",middleware.isLoggedIn,function(req, res){
-   //lookup annoucement using ID
-   annoucement.findById(req.params.id, function(err, annoucement){
+   //lookup announcement using ID
+   Announcement.findById(req.params.id, function(err, announcement){
        if(err){
            console.log(err);
-           res.redirect("/annoucements");
+           res.redirect("/announcements");
        } else {
         Comment.create(req.body.comment, function(err, comment){
            if(err){
@@ -35,11 +35,11 @@ router.post("/",middleware.isLoggedIn,function(req, res){
                comment.author.username = req.user.username;
                //save comment
                comment.save();
-               annoucement.comments.push(comment);
-               annoucement.save();
+               announcement.comments.push(comment);
+               announcement.save();
                console.log(comment);
                req.flash("success", "Successfully added comment");
-               res.redirect('/annoucements/' + annoucement._id);
+               res.redirect('/announcements/' + announcement._id);
            }
         });
        }
@@ -52,7 +52,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
       if(err){
           res.redirect("back");
       } else {
-        res.render("comments/edit", {annoucement_id: req.params.id, comment: foundComment});
+        res.render("comments/edit", {announcement_id: req.params.id, comment: foundComment});
       }
    });
 });
@@ -63,7 +63,7 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
       if(err){
           res.redirect("back");
       } else {
-          res.redirect("/annoucements/" + req.params.id );
+          res.redirect("/announcements/" + req.params.id );
       }
    });
 });
@@ -76,7 +76,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
            res.redirect("back");
        } else {
            req.flash("success", "Comment deleted");
-           res.redirect("/annoucements/" + req.params.id);
+           res.redirect("/announcements/" + req.params.id);
        }
     });
 });

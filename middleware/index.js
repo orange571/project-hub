@@ -1,18 +1,18 @@
-var Annoucement = require("../models/annoucement");
+var Announcement = require("../models/announcement");
 var Comment = require("../models/comment");
 
 // all the middleare goes here
 var middlewareObj = {};
 
-middlewareObj.checkAnnoucementOwnership = function(req, res, next) {
+middlewareObj.checkAnnouncementOwnership = function(req, res, next) {
  if(req.isAuthenticated()){
-        Annoucement.findById(req.params.id, function(err, foundAnnoucement){
+        Announcement.findById(req.params.id, function(err, foundAnnouncement){
            if(err){
-               req.flash("error", "Annoucement not found");
+               req.flash("error", "Announcement not found");
                res.redirect("back");
            }  else {
-               // does user own the annoucement?
-            if(foundAnnoucement.author.id.equals(req.user._id)) {
+               // does user own the announcement?
+            if(foundAnnouncement.author.id.equals(req.user._id)) {
                 next();
             } else {
                 req.flash("error", "You don't have permission to do that");

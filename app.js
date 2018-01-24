@@ -6,14 +6,14 @@ var express     = require("express"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
-    Annoncements  = require("./models/annoucement"),
+    Announcement  = require("./models/announcement"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
     seedDB      = require("./seeds");
   
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
-    annoucementRoutes = require("./routes/annoucements"),
+    announcementRoutes = require("./routes/announcements"),
     indexRoutes      = require("./routes/index")
  
 var url = process.env.DATABASEURL || "mongodb://localhost/project_hub_v1";
@@ -46,8 +46,8 @@ app.use(function(req, res, next){
 });
 
 app.use("/", indexRoutes);
-app.use("/annoucements", annoucementRoutes);
-app.use("/annoucements/:id/comments", commentRoutes);
+app.use("/announcements", announcementRoutes);
+app.use("/announcements/:id/comments", commentRoutes);
 
 
 

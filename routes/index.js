@@ -32,6 +32,11 @@ router.put("/profile", function(req, res){
        }
     });
 });
+/**
+router.get("/announcements", function(req, res){
+    console.log("you have reached the announcements get route on the index.js page");
+   res.render("announcements"); 
+});**/
 
 
 //handle sign up logic

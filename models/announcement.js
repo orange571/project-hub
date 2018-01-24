@@ -1,9 +1,7 @@
 var mongoose = require("mongoose");
 
-var annoucementSchema = new mongoose.Schema({
-   name: String,
-   image: String,
-   description: String,
+var announcementSchema = new mongoose.Schema({
+   title: String,
    author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,
@@ -11,6 +9,7 @@ var annoucementSchema = new mongoose.Schema({
       },
       username: String
    },
+   post_body: String,
    comments: [
       {
          type: mongoose.Schema.Types.ObjectId,
@@ -19,4 +18,4 @@ var annoucementSchema = new mongoose.Schema({
    ]
 });
 
-module.exports = mongoose.model("Annoucement", annoucementSchema);
+module.exports = mongoose.model("Announcement", announcementSchema);
