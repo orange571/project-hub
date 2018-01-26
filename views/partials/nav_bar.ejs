@@ -1,15 +1,15 @@
       <div class="ui small attached inverted stackable menu nav" id="desktop-nav">
         <div class="ui container">
-          <a class="item" id="logo" href="index.html">
+          <a class="item" id="logo" href="/">
             PROJECT HUB
           </a>
-          <a class="item" href="index.html">
+          <a class="item" href="/">
             <i class="home icon"></i> Home
           </a>
           <a class="item">
             <i class="info circle icon"></i> About Us
           </a>
-          <a class="item">
+          <a class="item" href="/locations">
             <i class="map outline icon"></i> Locations
           </a>
           <div class="ui simple dropdown item">
@@ -21,16 +21,19 @@
               <a class="item"><i class="fa fa-envelope-o"></i> Contact Us</a>
             </div>
           </div>
-           <div class="right menu">
+           <div class="right menu" id="reg-log-button-container">
             <% if(!currentUser){ %>
                 <div class="item">
-                     <a class="mini ui inverted blue button" href="register/">Sign Up</a>
+                     <a class="mini ui inverted blue button <%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>" href="/register">Sign Up</a>
                  </div>
                  <div class="item">
-                      <a class="ui mini inverted green button" href="login/">Log In</a>
+                      <a class="ui mini inverted green button <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>" href="/login">Log In</a>
                 </div>
             <% } else { %>
                 <div class="item">Signed In As <%= currentUser.username %></div>
+                <div class="item">
+                     <a class="mini ui inverted orange button" href="/announcements">Go To Portal</a>
+                 </div>
                 <div class="item">
                   <a class="ui mini inverted green button" href="logout/">Log Out</a>
                 </div>

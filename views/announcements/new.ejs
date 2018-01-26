@@ -1,16 +1,18 @@
 <% include ../partials/portal_header %>
       <div class="ui container main" id="content">
+          <% include ../partials/error_alert %>
         <h1>Announcements-Create New</h1>
-        <section>
-           <form action="/announcements" method="POST">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="title" placeholder="Title">
+        <section id="new_announcement_container">
+           <form class="ui form" action="/announcements" method="POST">
+                <div class="field">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" placeholder="Title">
                 </div>
-                <div class="form-group">
+                <div class="field">
                     <textarea name="post_body" placeholder="Enter text here"></textarea>
                 </div>
-                <div class="form-group">
-                    <button class="ui mini inverted green button">Submit!</button>
+                <div class="field">
+                    <button class="ui mini inverted green button" type="submit">Submit!</button>
                 </div>
             </form>
             <a href="/announcements">Go Back</a>

@@ -1,0 +1,91 @@
+<% include ./partials/header %> 
+    <div id="container">
+        <% include ./partials/nav_bar %>
+        <div class="ui container main">
+            <% include ./partials/error_alert %>
+            <h1>Locations</h1>
+            <div id="location-container">
+                <div class="locations-wrapper">
+                    <% JSON.parse(hubs).forEach(function(hub, index){ %>
+                       <div class="location-summary" data-hub-id="<%= hub._id%>" data-markerid="<%= index %>">
+                           <h4><%= hub.name %></h4>
+                           <p><%= hub.location %></p>
+                           <p><%= hub.phoneNumber %></p>
+                       </div>
+                    <% }); %>
+                </div>
+                <div class="location-full-info-container">
+                    <div id="map"></div>
+                    <div id="location-details"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfooter"></div>
+        <script>
+            $(function(){
+                var markers = new Array();
+                var getHubs = JSON.parse('<%- hubs %>');
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 8,
+                  center: new google.maps.LatLng(getHubs[0].lat, getHubs[0].lng),
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+            
+                var infowindow = new google.maps.InfoWindow();
+            
+                var marker, i;
+            
+                for (i = 0; i < getHubs.length; i++) {
+                  marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(getHubs[i].lat, getHubs[i].lng),
+                    map: map
+                  });
+            
+                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                      infowindow.setContent(getHubs[i].name);
+                      infowindow.open(map, marker);
+                      openLocationDetails(getHubTarget(getHubs[i]._id));
+                    }
+                  })(marker, i));
+                  markers.push(marker);
+                }
+                
+                function getHubTarget(hubObjectId) {
+                    var hubTarget;
+                    getHubs.forEach(function(hub){
+                       if(hubObjectId == hub._id){
+                           hubTarget=hub;
+                       }
+                    });
+                    return hubTarget;
+                }
+                
+                function openLocationDetails (hubTarget) {
+                   var content = "<div class='img-container'><img src='" + hubTarget.image + "'></div>";
+                   content += "<div class='details'><h3>" + hubTarget.name + "</h3>";
+                   content += "<p>" + hubTarget.description + "</p>";
+                   content += "<p>" + hubTarget.location + "</p>";
+                   content += "<p>" + hubTarget.phoneNumber + "</p>";
+                   content += "<p>" + hubTarget.email + "</p>";
+                   content += "</div>";
+                   
+                   $('#location-details').html(content);
+                }
+                
+               $(".location-summary").on("click", function(){
+                   var hubObjectId = $(this).closest('.location-summary')[0].dataset.hubId;
+                   var hubTarget = getHubTarget(hubObjectId);
+                   openLocationDetails(hubTarget);
+                   map.setCenter({lat:hubTarget.lat, lng:hubTarget.lng});
+                   google.maps.event.trigger(markers[$(this).data('markerid')], 'click');
+               }) 
+            });
+            
+       
+        </script>
+    </div><!--End of ##container-->    
+    
+<% include ./partials/footer %> 
+
+

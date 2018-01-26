@@ -146,3 +146,58 @@ footer .heading{
 .portal_logout_container div{
   margin-bottom: 5px;
 }
+
+
+.post_wrapper {
+  margin: 20px 5px;
+}
+
+.post_wrapper .post {
+  margin: 10px 5px;
+  padding: 10px 10px;
+  border: 1px solid #555;
+  max-width: 600px;
+}
+
+.post_wrapper .post .button-container{
+  text-align: right;
+}
+
+.post_wrapper .post_content {
+  margin-bottom: 10px;
+}
+
+.post_wrapper .post_content h4 {
+  margin-bottom: 2px;
+}
+
+.post_wrapper .post_content .post_body {
+  margin-left: 1rem;
+}
+
+.post_wrapper .post_content .username {
+  font-style: italic;
+}
+
+.ui.form .field>label{
+  color: #eee;
+}
+
+#new_annoucement_container .form, #edit_announcement_container .form{
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+
+#show_announcements_container .button-container {
+  display: flex;
+}
+
+#show_announcements_container .nav_back{
+  margin: 20px;
+}
+
+#show_announcements_container .post{
+  margin: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}

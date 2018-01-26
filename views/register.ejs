@@ -1,13 +1,21 @@
 <% include ./partials/header %>
     <div id="container">
         <% include ./partials/nav_bar %>
-        <div class="ui container main">
+        <div class="ui container main" id="register-container">
             <% include ./partials/error_alert %>
             <h1>Sign Up!</h1>
-            <form action="/register" method="post">
-                <input type="text" name="username" placeholder="username">
-                <input type="password" name="password" placeholder="password">
-                <button>Sign Up</button>
+            <form class="ui form" action="/register" method="post">
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" placeholder="username">
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="password" id="password">
+                </div>
+                <div class="field right">
+                    <button class="ui huge blue button" type="submit">Sign Up!</button>
+                </div>
             </form>
         </div>    
         <div class="clearfooter"></div>

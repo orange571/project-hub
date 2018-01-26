@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Project Hub Portal</title>
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
@@ -10,6 +10,15 @@
     <link href="/stylesheets/portal.css" rel="stylesheet" type="text/css" />
     <script src="https://use.fontawesome.com/d7de585d6e.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+    <script>
+      $(function(){
+          $('.message .close').on('click', function() {
+            $(this).closest('.message').fadeOut(100, function() { $(this).remove(); });
+              console.log("clicked close icon");
+            })
+          ;
+      });       
+    </script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>-->
   </head>
   <body>
@@ -78,7 +87,7 @@
                     Signed In As <span><%= currentUser.username %></span>
                 <% } %>
               </div>
-              <a class="ui mini inverted white button" href="logout/">Log Out</a>
+              <a class="ui mini inverted white button" href="/logout">Log Out</a>
             </div>
           </li>
           <li>

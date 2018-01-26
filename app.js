@@ -9,6 +9,7 @@ var express     = require("express"),
     Announcement  = require("./models/announcement"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
+    Hub         = require("./models/hub"),
     seedDB      = require("./seeds");
   
 //requiring routes
@@ -24,7 +25,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-// seedDB(); //seed the database
+seedDB(); //seed the database
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({

@@ -1,19 +1,18 @@
-<% include ../partials/header %>
-<div class="container">
-    <div class="row">
-        <h1 style="text-align: center">Edit Comment</h1>
-        <div style="width: 30%; margin: 25px auto;">
-            <form action="/announcements/<%= announcement_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="comment[text]" value="<%= comment.text %>">
+<% include ../partials/portal_header %>
+      <div class="ui container main" id="content">
+          <% include ../partials/error_alert %>
+        <h1>Announcements-Edit Comment</h1>
+        <section id="new_announcement_container">
+            <h1>Edit Comment to <%= announcement.title %></h1>
+           <form class="ui form" action="/announcements/<%= announcement_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+                <div class="field">
+                    <textarea name="comment[text]" placeholder="Enter text here"><%= comment.text %></textarea>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                <div class="field">
+                    <button class="ui mini inverted green button" type="submit">Submit!</button>
                 </div>
             </form>
-            <a href="/annoucments">Go Back</a>
-        </div>
-    </div>
-</div>
-<% include ../partials/footer %>
-
+            <a href="/announcements/<%= announcement._id %>">Go Back</a>
+        </section>
+      </div>
+<% include ../partials/portal_footer %>

@@ -106,7 +106,7 @@ hr.double-line:after {
 
 .main {
   margin-top: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .main h2{
@@ -265,4 +265,94 @@ section:first-of-type {
 
 form {
   color: #000;
+}
+
+#reg-log-button-container .blue.active {
+  background-color: #1678c2;
+  color:#ddd;
+  box-shadow: none!important;
+}
+
+#reg-log-button-container .green.active {
+  background-color: #16ab39;
+  color:#ddd;
+  box-shadow: none!important;
+}
+
+#login-container .form, #register-container .form{
+  max-width: 25rem;
+  margin: 20px auto;
+}
+
+.field.right {
+  text-align: right;
+}
+
+#register-container, #login-container {
+  text-align: center;
+}
+
+.form .button{
+  width: 100%;
+}
+
+.ui.form .field>label {
+  color: #fff;
+  font-size: 1.6rem;
+  text-align: left;
+}
+
+.ui.form input[type=text], .ui.form input[type=password] {
+  font-size: 1.3rem;
+}
+
+.ui.message {
+  text-align: left;
+}
+
+#location-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.locations-wrapper {
+  flex: 1 0 200px;
+  max-width: 300px;
+}
+
+
+.location-full-info-container {
+  flex: 3 0 200px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+#location-details img{
+  max-width: 500px;
+  max-height: 333px;
+}
+
+#map {
+  color: #000;
+  width: 100%;
+  min-width: 300px;
+  height: 30vh;
+  
+}
+
+#location-container #location-details {
+  margin-top: 20px;
+}
+
+.location-summary {
+  margin: 10px 0;
+  margin-right: 10px;
+  padding: 10px 10px;
+  transition: background-color 0.4s, padding 0.2s;
+}
+
+.location-summary:hover {
+  background-color: #444;
 }

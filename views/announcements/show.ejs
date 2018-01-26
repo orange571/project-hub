@@ -1,21 +1,50 @@
 <% include ../partials/portal_header %>
       <div class="ui container main" id="content">
+          <% include ../partials/error_alert %>
         <h1>Announcements-Show</h1>
-        <section>
-           <div class="segment">
+        <section id="show_announcements_container">
+           <div class="post">
                 <h4><a><%= announcement.title%></a></h4>
                 <p><%= announcement.post_body %></p>
                 <p>
                     <em>Submitted By <%= announcement.author.username %></em>
                 </p>
-                <% if(currentUser && announcement.author.id.equals(currentUser._id)){ %>
-                    <a class="ui mini inverted blue button" href="/announcements/<%= announcement._id %>/edit">Edit</a>
-                    <form id="delete-form" action="/announcements/<%= announcement._id %>?_method=DELETE" method="POST">
-                        <button class="ui mini inverted red button">Delete</button>
-                    </form>
-                <% }%>
+                <div class="button-container">
+                    <% if(currentUser && announcement.author.id.equals(currentUser._id)){ %>
+                        <a class="ui mini inverted blue button" href="/announcements/<%= announcement._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/announcements/<%= announcement._id %>?_method=DELETE" method="POST">
+                            <button class="ui mini inverted red button">Delete</button>
+                        </form>
+                    <% }%>
+                </div>
+                        
+                <div class="well">
+                    <div>
+                        <a class="ui mini inverted green button" href="/announcements/<%= announcement._id %>/comments/new">Add New Comment</a>
+                    </div>
+                    <hr>
+                    <% announcement.comments.forEach(function(comment){ %>
+                        <div class="">
+                            <div class="">
+                                <strong><%= comment.author.username %></strong>
+                                <span class="">10 days ago</span>
+                                <p>
+                                    <%= comment.text %> 
+                                </p>
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <a class="ui mini inverted blue button" 
+                                   href="/announcements/<%= announcement._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                                <form id="delete-form" action="/announcements/<%= announcement._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                    <input type="submit" class="ui mini inverted red button" value="Delete">
+                                </form>
+                            <% } %>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <!--End of Post-->
             </div>   
-
+            <a class="nav_back" href="/announcements">Go Back</a>
         </section>
       </div>
 <% include ../partials/portal_footer %>

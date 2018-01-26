@@ -8,7 +8,11 @@
         <div class="content">
           <h2>Let's build a community</h2>
           <p>Join us in a movement to change the way see our neighborhoods</p>
-          <button class="ui massive primary button">Get Started</button>
+          <% if(!currentUser){ %>
+              <a href="/register" class="ui massive primary button">Register</a>
+          <% } else { %>
+              <a href="/announcements" class="ui massive primary button">Get Started</a>
+          <% } %>
         </div>
       </div>
     </div>

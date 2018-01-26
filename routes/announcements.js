@@ -54,8 +54,11 @@ router.get("/:id", function(req, res){
         if(err){
             console.log(err);
         } else {
+            console.log("This is the announcement");
             console.log(foundAnnouncement)
             //render show template with that announcement
+            console.log("This is the announcement");
+            
             res.render("announcements/show", {announcement: foundAnnouncement});
         }
     });
@@ -87,6 +90,7 @@ router.put("/:id",middleware.checkAnnouncementOwnership, function(req, res){
 
 // DESTROY announcement ROUTE
 router.delete("/:id",middleware.checkAnnouncementOwnership, function(req, res){
+    console.log("reached delete annoucement route");
    Announcement.findByIdAndRemove(req.params.id, function(err){
       if(err){
           res.redirect("/announcements");

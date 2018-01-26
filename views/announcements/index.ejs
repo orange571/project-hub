@@ -1,34 +1,30 @@
 <% include ../partials/portal_header %>
       <div class="ui container main" id="content">
+          <% include ../partials/error_alert %>
         <h1>Announcements-Index</h1>
         <section>
-          <div class="container">
-             
-                 <div class="container">
-                     <h1>Welcome To Project Hub!</h1>
-                     <p>Feel Free to Add Your Announcement</p>
-                     <p>
-                        <a class="btn btn-primary btn-large" href="/announcements/new">Add New Announcement</a>
-                     </p>
-                 </div>
-            
-                 
-             <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <div class="announcement_header">
+                 <h1>Welcome To Project Hub!</h1>
+                 <p>Feel Free to Add Your Announcement</p>
+                 <p>
+                    <a class="ui small inverted green button" href="/announcements/new">Add New Announcement</a>
+                 </p>
+             </div>
+             <div class="post_wrapper">
                 <%announcements.forEach(function(announcement){ %>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="thumbnail">
-                           <div class="caption">
-                               <h4><%= announcement.title %></h4>
-                               <p><%= announcement.post_body %></p>
-                           </div>
-                           <p>
-                               <a href="/announcements/<%= announcement._id %>" class="btn btn-primary">More Info</a>
-                           </p>
-                        </div>
+                    <div class="post">
+                       <div class="post_content">
+                           <h4><%= announcement.title %></h4>
+                           <p class="username">Submitted by <%= announcement.author.username %></p>
+                           <p class="post_body"><%= announcement.post_body %></p>
+                       </div>
+                       <p class="button-container">
+                           <a href="/announcements/<%= announcement._id %>" class="ui mini inverted blue button">More Info</a>
+                       </p>
                     </div>
                 <% }); %>
             </div>
-            </div>
+            
         </section>
       </div>
 <% include ../partials/portal_footer %>

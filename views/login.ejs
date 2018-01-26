@@ -1,13 +1,21 @@
 <% include ./partials/header %> 
     <div id="container">
         <% include ./partials/nav_bar %>
-        <div class="ui container main">
+        <div class="ui container main" id="login-container">
             <% include ./partials/error_alert %>
             <h1>Login!</h1>
-            <form action="/login" method="POST">
-                <input type="text" name="username" placeholder="username">
-                <input type="password" name="password" placeholder="password">
-                <input type="submit" value="Login!">
+            <form class="ui form" action="/login" method="POST">
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" placeholder="username" id="username" autofocus>
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="password" id="password">
+                </div>
+                <div class="field right">
+                    <button class="ui huge green button" type="submit">Login!</button>
+                </div>
             </form>
         </div>
         <div class="clearfooter"></div>
