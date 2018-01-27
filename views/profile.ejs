@@ -15,7 +15,12 @@
           </div>
           <div class="profile_items">
             <h3>Profile Picture:</h3>
-            <img src='<%= currentUser.picture %>' class="profile_image"/>
+            <% if(currentUser.picture == '') {%>
+              <i class="user circle icon"></i> <div> Profile picture has not been set</div>
+            <% } else { %>
+              <img src='<%= currentUser.picture %>' class="profile_image"/>
+            <% } %>
+            
           </div>
           <div class="profile_items">
             <h3>Change profile picture</h3>

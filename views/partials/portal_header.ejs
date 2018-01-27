@@ -23,13 +23,13 @@
   </head>
   <body>
     <header>
-      <nav>
+      <nav id="portal-nav">
         <ul>
           <li id="logo_container">
             <a href="/" id="logo">Project<br><span>Hub</span></a>
           </li>
           <li>
-            <a href="/profile" class="active">
+            <a href="/profile" class="<% if(page === "profile"){ %><%="active"%><% } %>">
               <div class="icon_container">
                 <i class="user circle icon"></i>
                 <div class="icon_text">Profile</div>
@@ -45,7 +45,7 @@
             </a>
           </li>
           <li>
-            <a href="/announcements">
+            <a href="/announcements" class="<% if(page === "announcements"){ %><%="active"%><% } %>">
               <div class="icon_container">
                 <i class="announcement icon"></i>
                 <div class="icon_text">News</div>

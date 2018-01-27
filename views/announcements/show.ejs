@@ -4,41 +4,65 @@
         <h1>Announcements-Show</h1>
         <section id="show_announcements_container">
            <div class="post">
-                <h4><a><%= announcement.title%></a></h4>
-                <p><%= announcement.post_body %></p>
-                <p>
-                    <em>Submitted By <%= announcement.author.username %></em>
-                </p>
-                <div class="button-container">
-                    <% if(currentUser && announcement.author.id.equals(currentUser._id)){ %>
-                        <a class="ui mini inverted blue button" href="/announcements/<%= announcement._id %>/edit">Edit</a>
-                        <form id="delete-form" action="/announcements/<%= announcement._id %>?_method=DELETE" method="POST">
-                            <button class="ui mini inverted red button">Delete</button>
-                        </form>
-                    <% }%>
-                </div>
+               <article>
+                    <h4><%= announcement.title%></h4>
+                    <p><%= announcement.post_body %></p>
+                    <div class="author-details">
+                        <div class="author-pic-name">
+                            <div class="author-picture">
+                                <% if(announcement.author.picture == '') {%>
+                                  <i class="user circle icon"></i>
+                                <% } else { %>
+                                  <img src='<%= announcement.author.picture %>' class="profile_image"/>
+                                <% } %>
+                            </div>
+                            <span><em>Submitted By <%= announcement.author.username %></em></span>
+                        </div>
+                        <div class="button-container">
+                            <% if(currentUser && announcement.author.equals(currentUser._id)){ %>
+                                <a class="ui mini inverted blue button" href="/announcements/<%= announcement._id %>/edit">Edit</a>
+                                <form id="delete-form" action="/announcements/<%= announcement._id %>?_method=DELETE" method="POST">
+                                    <button class="ui mini inverted red button">Delete</button>
+                                </form>
+                            <% }%>
+                        </div>
+                    </div>
+               </article>
+
+
                         
                 <div class="well">
-                    <div>
+                    <div class="add-button-container">
                         <a class="ui mini inverted green button" href="/announcements/<%= announcement._id %>/comments/new">Add New Comment</a>
                     </div>
                     <hr>
                     <% announcement.comments.forEach(function(comment){ %>
-                        <div class="">
-                            <div class="">
-                                <strong><%= comment.author.username %></strong>
-                                <span class="">10 days ago</span>
+                        <div class="comment-entry">
+                            <div class="user-picture">
+                                    <% if(comment.author.picture == '') {%>
+                                      <i class="user circle icon"></i>
+                                    <% } else { %>
+                                      <img src='<%= comment.author.picture %>' class="profile_image"/>
+                                    <% } %>
+                                </div>
+                            <div class="comment-main">
+                                <div class="comment-header">
+                                    <span class="username"><strong><%= comment.author.username %></strong></span>
+                                    <span class="date">10 days ago</span>
+                                </div>
                                 <p>
                                     <%= comment.text %> 
                                 </p>
-                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                                <a class="ui mini inverted blue button" 
-                                   href="/announcements/<%= announcement._id %>/comments/<%= comment._id %>/edit">Edit</a>
-                                <form id="delete-form" action="/announcements/<%= announcement._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                                    <input type="submit" class="ui mini inverted red button" value="Delete">
-                                </form>
-                            <% } %>
-                            </div>
+                                <div class='button-container'>
+                                    <% if(currentUser && comment.author._id.equals(currentUser._id)){ %>
+                                        <a class="ui mini inverted blue button" 
+                                           href="/announcements/<%= announcement._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                                        <form id="delete-form" action="/announcements/<%= announcement._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                            <input type="submit" class="ui mini inverted red button" value="Delete">
+                                        </form>
+                                    <% } %>
+                                </div>
+                            </div>      
                         </div>
                     <% }) %>
                 </div>

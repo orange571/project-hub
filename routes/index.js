@@ -2,7 +2,8 @@ var express = require("express");
 var router  = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
-var Hub = require("../models/hub")
+var Hub = require("../models/hub");
+var middleware = require("../middleware");
 
 //root route
 router.get("/", function(req, res){
@@ -53,12 +54,12 @@ router.get("/logout", function(req, res){
 });
 
 //profile route
-router.get("/profile", function(req, res){
+router.get("/profile", middleware.isLoggedIn, function(req, res){
     console.log("showing profile page for" + res.locals.currentUser._id + " " + res.locals.currentUser.username);
-   res.render("profile"); 
+   res.render("profile", {page: 'profile'}); 
 });
 
-router.put("/profile", function(req, res){
+router.put("/profile", middleware.isLoggedIn, function(req, res){
     console.log("put request to profile recieved");
     // find and update the correct campground
     User.findByIdAndUpdate(res.locals.currentUser._id,{picture: req.body.img_url}, function(err, updatedProfile){

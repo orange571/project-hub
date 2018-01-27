@@ -15,8 +15,18 @@
                     <div class="post">
                        <div class="post_content">
                            <h4><%= announcement.title %></h4>
-                           <p class="username">Submitted by <%= announcement.author.username %></p>
                            <p class="post_body"><%= announcement.post_body %></p>
+                            <div class="author-pic-name">
+                                <div class="author-picture">
+                                    <% if(announcement.author.picture == '') {%>
+                                      <i class="user circle icon"></i>
+                                    <% } else { %>
+                                      <img src='<%= announcement.author.picture %>' class="profile_image"/>
+                                    <% } %>
+                                </div>
+                                <span><em>Submitted By <%= announcement.author.username %></em></span>
+                            </div>
+                           
                        </div>
                        <p class="button-container">
                            <a href="/announcements/<%= announcement._id %>" class="ui mini inverted blue button">More Info</a>

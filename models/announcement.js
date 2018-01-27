@@ -3,11 +3,8 @@ var mongoose = require("mongoose");
 var announcementSchema = new mongoose.Schema({
    title: String,
    author: {
-      id: {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: "User"
-      },
-      username: String
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
    },
    post_body: String,
    comments: [
