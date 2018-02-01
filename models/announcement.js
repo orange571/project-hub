@@ -7,6 +7,7 @@ var announcementSchema = new mongoose.Schema({
       ref: "User"
    },
    post_body: String,
+   createdAt: { type: Date, default: Date.now },
    comments: [
       {
          type: mongoose.Schema.Types.ObjectId,

@@ -3,7 +3,7 @@
           <% include ../partials/error_alert %>
         <h1>Announcements-Create New</h1>
         <section id="new_announcement_container">
-           <form class="ui form" action="/announcements" method="POST">
+           <form class="ui form announcement" action="/announcements" method="POST" id="new-announcement-form">
                 <div class="field">
                     <label for="title">Title</label>
                     <input type="text" name="title" id="title" placeholder="Title">
@@ -15,7 +15,8 @@
                     <button class="ui mini inverted green button" type="submit">Submit!</button>
                 </div>
             </form>
-            <a href="/announcements">Go Back</a>
+
+            <a href="/announcements" class="nav_back">Go Back</a>
         </section>
       </div>
 <% include ../partials/portal_footer %>

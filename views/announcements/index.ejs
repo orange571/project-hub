@@ -24,7 +24,7 @@
                                       <img src='<%= announcement.author.picture %>' class="profile_image"/>
                                     <% } %>
                                 </div>
-                                <span><em>Submitted By <%= announcement.author.username %></em></span>
+                                <span><em>Submitted By <%= announcement.author.username %>, <%= moment(announcement.createdAt).fromNow() %></em></span>
                             </div>
                            
                        </div>

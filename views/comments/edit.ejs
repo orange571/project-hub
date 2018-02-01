@@ -4,7 +4,7 @@
         <h1>Announcements-Edit Comment</h1>
         <section id="new_announcement_container">
             <h1>Edit Comment to <%= announcement.title %></h1>
-           <form class="ui form" action="/announcements/<%= announcement_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+           <form class="ui form comment" action="/announcements/<%= announcement_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
                 <div class="field">
                     <textarea name="comment[text]" placeholder="Enter text here"><%= comment.text %></textarea>
                 </div>

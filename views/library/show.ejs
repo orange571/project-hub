@@ -1,0 +1,39 @@
+<% include ../partials/portal_header %>
+      <div class="ui container main" id="content">
+          <% include ../partials/error_alert %>
+        <h1>Library-Item Details</h1>
+        <section id="show_item_container">
+           <div class="post">
+               <article>
+                    <h4><%= item.name%></h4>
+                    <p><%= item.description %></p>
+                        <p class="availability">
+                            <% if(item.isAvailable === true) {%>
+                              is Available
+                            <% } else { %>
+                              Not Available
+                            <% } %>
+                         </p>
+                    <div class="author-details">
+                        <div class="author-pic-name">
+                            <span><em>Submitted By <%= item.owner.username %>, <%= moment(item.createdAt).fromNow() %></em></span>
+                        </div>
+                        <div class="button-container">
+                            <% if(currentUser && item.owner.equals(currentUser._id)){ %>
+                                <a class="ui mini inverted blue button" href="/library/<%= item._id %>/edit">Edit</a>
+                            <% }%>  
+                            <% if(currentUser && item.owner.equals(currentUser._id) || currentUser.isAdmin){ %>
+                                <form id="delete-form" action="/library/<%= item._id %>?_method=DELETE" method="POST">
+                                    <button class="ui mini inverted red button">Delete</button>
+                                </form>
+                            <% }%>
+                        </div>
+                    </div>
+               </article>
+            <!--End of Post-->
+            </div>   
+            <a href="/library" class="nav_back">Go Back</a>
+        </section>
+      </div>
+<% include ../partials/portal_footer %>
+

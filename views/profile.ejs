@@ -24,8 +24,13 @@
           </div>
           <div class="profile_items">
             <h3>Change profile picture</h3>
-            <form action="/profile?_method=PUT" method="POST">
-              <label>Enter image URL: <input type="text" name="img_url"></label>
+            <form action="/profile_url?_method=PUT" method="POST">
+              <label>Enter image URL (must be from images.unsplash.com): <input type="text" name="img_url"></label>
+              <input type="submit">
+            </form>
+            OR
+            <form action="/profile_upload?_method=PUT" method="POST" enctype="multipart/form-data">
+              <label>Upload local image file: <input type="file" id="image" name="image" accept="image/*" required></label>
               <input type="submit">
             </form>
           </div>
@@ -63,7 +68,20 @@
           </div>
           <div class="profile_items">
             <h3>Privileges:</h3>
-            <p class="profile_data">Community Member</p>
+            <p class="profile_data">Community Member
+              <% if(currentUser.isAdmin) {%>
+                , &nbsp; Admin
+              <% } %>
+
+            </p>
+          </div>
+          
+          <div class="profile_items">
+            <h3>Admin Code:</h3>
+            <form action="/admin?_method=PUT" method="POST">
+              <label>Enter Admin Code: <input type="text" name="adminCode"></label>
+              <input type="submit">
+            </form>
           </div>
         </section>
       </div>

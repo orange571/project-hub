@@ -1,0 +1,28 @@
+<% include ../partials/portal_header %>
+      <div class="ui container main" id="content">
+          <% include ../partials/error_alert %>
+        <h1>Library-Create New Item</h1>
+        <section id="new_item_container">
+           <form class="ui form item" action="/library" method="POST" id="new-item-form">
+                <div class="field">
+                    <label for="name">Title/Name</label>
+                    <input type="text" name="name" id="name" placeholder="name">
+                </div>
+                <div class="field">
+                    <textarea name="description" placeholder="Enter text here"></textarea>
+                </div>
+                <div class="inline field">
+                    <div class="ui toggle checkbox availability">
+                        
+                        <input type="checkbox" tabindex="0" class="hidden" name='isAvailable'checked>
+                          <label>Availability: &nbsp; <span>Available</span></label>
+                    </div>
+                </div>
+                    <button class="ui mini inverted green button" type="submit">Submit!</button>
+                </div>
+            </form>
+
+            <a href="/library" class="nav_back">Go Back</a>
+        </section>
+      </div>
+<% include ../partials/portal_footer %>

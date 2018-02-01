@@ -27,6 +27,7 @@ main {
   padding: 30px;
 }
 
+
 header {
   display: webkit flex;
   display: flex;
@@ -220,8 +221,8 @@ article .author-details span {
 }
 
 
-#show_announcements_container .nav_back{
-  margin: 20px;
+.nav_back{
+  padding-top: 20px;
 }
 
 #show_announcements_container .post{
@@ -297,4 +298,90 @@ article .author-details img {
 .comment-entry .button-container {
   display: flex;
   justify-content: flex-end;
+}
+
+.hide-icon-text {
+  display: none !IMPORTANT;
+}
+
+.mini-nav-header {
+  width: 50px !important;
+}
+
+.ui.button.mini-logout {
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+}
+
+#primaryNavToggle.flip-arrow {
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+.ui.form.comment, .ui.form.announcement {
+  margin-bottom: 20px;
+}
+
+/**LIBRARY STYLES**/
+#lib_content {
+  -webkit-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-width: 1px;
+  display: flex;
+}
+
+#lib_nav {
+  width: 150px;
+  background-color: #3b3b3b;
+  padding: 10px 5px;
+}
+
+.shortid {
+  font-family: 'PT Mono', monospace;
+}
+
+section.lib {
+  flex: 1 0 auto;
+  margin: 30px;
+}
+
+footer.ui.segment{
+  margin-top: 0;
+}
+
+
+
+.ui.toggle.checkbox {
+  color: #fff;
+}
+
+.ui.checkbox input:focus~label {
+  color: #fff;
+}
+
+.ui.toggle.checkbox label:before {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.ui.toggle.checkbox label:hover::before {
+  background-color: rgba(255,255,255,0.3);
+}
+
+.ui.toggle.checkbox input:focus~label:before{
+    background-color:rgba(255,255,255,.2);
+}
+
+.ui.toggle.checkbox label{
+  color: #fff;
+}
+
+.ui.toggle.checkbox input:checked~label{
+    color:#fff !important;
+}
+
+.ui.toggle.checkbox input:focus:checked~label{
+    color:#fff !important;
 }

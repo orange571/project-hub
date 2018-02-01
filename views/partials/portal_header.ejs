@@ -6,10 +6,12 @@
     <title>Project Hub Portal</title>
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
     <link href="/stylesheets/portal.css" rel="stylesheet" type="text/css" />
     <script src="https://use.fontawesome.com/d7de585d6e.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/components/checkbox.js"></script>
     <script>
       $(function(){
           $('.message .close').on('click', function() {
@@ -17,6 +19,45 @@
               console.log("clicked close icon");
             })
           ;
+          
+          // Get saved data from sessionStorage
+          console.log("initial : " + sessionStorage.navStatus)
+          
+          if(sessionStorage.navStatus === "mini") {
+            $(".icon_text").toggleClass('hide-icon-text');
+            $("header").toggleClass('mini-nav-header');
+            $(".ui.button.logout").toggleClass('mini-logout');
+            $("#primaryNavToggle").toggleClass('flip-arrow');
+            $("#logo_container div").html("PH");
+          }
+          
+          $("#primaryNavToggle").on('click', function(){
+            $(".icon_text").toggleClass('hide-icon-text');
+            $("header").toggleClass('mini-nav-header');
+            $(".ui.button.logout").toggleClass('mini-logout');
+            $(this).toggleClass('flip-arrow');
+            if (sessionStorage.navStatus === 'expanded') {
+              console.log("is expanded: " + sessionStorage.navStatus)
+              sessionStorage.navStatus = 'mini';
+              $("#logo_container div").html("PH");
+            } else if (sessionStorage.navStatus === 'mini') {
+              console.log("is mini: " + sessionStorage.navStatus)
+              sessionStorage.navStatus = 'expanded';
+              $("#logo_container div").html("Project<br><span>Hub</span>");
+            }else {
+              console.log("is undefined?: " + sessionStorage.navStatus)
+              sessionStorage.navStatus = 'mini';
+              $("#logo_container div").html("PH");
+            }
+            console.log('clicked main nav toggle')
+          })
+          
+          $('.ui.checkbox').checkbox();
+          $('.ui.checkbox.availability').checkbox({
+            onChecked: function(){$('.ui.checkbox.availability span').text("Available");},
+            onUnchecked: function(){$('.ui.checkbox.availability span').text("Not Available");},
+          });
+          
       });       
     </script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>-->
@@ -26,7 +67,11 @@
       <nav id="portal-nav">
         <ul>
           <li id="logo_container">
-            <a href="/" id="logo">Project<br><span>Hub</span></a>
+            <a href="/" id="logo">
+              <div>
+                Project<br><span>Hub</span>
+              </div>
+            </a>
           </li>
           <li>
             <a href="/profile" class="<% if(page === "profile"){ %><%="active"%><% } %>">
@@ -37,7 +82,7 @@
             </a>
           </li>
           <li>
-            <a href="/dashboard">
+            <a href="/dashboard" class="<% if(page === "dashboard"){ %><%="active"%><% } %>">
               <div class="icon_container">
                 <i class="dashboard icon"></i>
                 <div class="icon_text">Dashboard</div>
@@ -53,7 +98,7 @@
             </a>
           </li>
           <li>
-            <a href="/library">
+            <a href="/library" class="<% if(page === "library"){ %><%="active"%><% } %>">
               <div class="icon_container">
                 <i class="archive icon"></i>
                 <div class="icon_text">Library</div>
@@ -61,7 +106,7 @@
             </a>
           </li>
           <li>
-            <a href="/calendar">
+            <a href="/calendar" class="<% if(page === "calendar"){ %><%="active"%><% } %>">
               <div class="icon_container">
                 <i class="calendar icon"></i>
                 <div class="icon_text">Calendar</div>
@@ -69,7 +114,7 @@
             </a>
           </li>
           <li>
-            <a href="/info">
+            <a href="/info" class="<% if(page === "location_details"){ %><%="active"%><% } %>">
               <div class="icon_container">
                 <i class="info circle icon"></i>
                 <div class="icon_text">Info</div>
@@ -87,12 +132,12 @@
                     Signed In As <span><%= currentUser.username %></span>
                 <% } %>
               </div>
-              <a class="ui mini inverted white button" href="/logout">Log Out</a>
+              <a class="ui mini inverted white button logout" href="/logout">Log Out</a>
             </div>
           </li>
           <li>
             <a href="#">
-              <div>
+              <div id="primaryNavToggle">
                 <i class="arrow circle left icon"></i>
               </div>
             </a>

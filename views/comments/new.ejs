@@ -4,7 +4,7 @@
         <h1>Announcements-Create New Comment</h1>
         <section id="new_announcement_container">
             <h1>Add New Comment to <%= announcement.title %></h1>
-           <form class="ui form" action="/announcements/<%= announcement._id %>/comments" method="POST">
+           <form class="ui form comment" action="/announcements/<%= announcement._id %>/comments" method="POST">
                 <div class="field">
                     <textarea name="comment[text]" placeholder="Enter text here"></textarea>
                 </div>
@@ -12,7 +12,7 @@
                     <button class="ui mini inverted green button" type="submit">Submit!</button>
                 </div>
             </form>
-            <a href="/announcements/<%= announcement._id %>">Go Back</a>
+            <a href="/announcements/<%= announcement._id %>" class="nav_back">Go Back</a>
         </section>
       </div>
 <% include ../partials/portal_footer %>

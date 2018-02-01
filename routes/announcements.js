@@ -25,6 +25,14 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var title = req.body.title;
     var author = req.user._id;
     var post_body = req.body.post_body;
+    //Check for leading or trailing whitespace
+    post_body = post_body.replace(/^\s+/, '').replace(/\s+$/, '');
+    title = title.replace(/^\s+/, '').replace(/\s+$/, '');
+    if (post_body === '' || title === '') {
+        console.log("text was all whitespace");
+        req.flash("error", "Field(s) was empty or only contained white space.");
+        return res.redirect("/announcements/new");
+    } 
     var newAnnouncement = {title: title, author:author, post_body: post_body}
     console.log(newAnnouncement);
     // Create a new announcement and save to DB
@@ -78,6 +86,16 @@ router.get("/:id/edit", middleware.checkAnnouncementOwnership, function(req, res
 
 // UPDATE announcement ROUTE
 router.put("/:id",middleware.checkAnnouncementOwnership, function(req, res){
+    var title = req.body.announcement.title;
+    var post_body = req.body.announcement.post_body;
+    //Check for leading or trailing whitespace
+    post_body = post_body.replace(/^\s+/, '').replace(/\s+$/, '');
+    title = title.replace(/^\s+/, '').replace(/\s+$/, '');
+    if (post_body === '' || title === '') {
+        console.log("text was all whitespace");
+        req.flash("error", "Field(s) was empty or only contained white space.");
+        return res.redirect("back");
+    } 
     // find and update the correct announcement
     Announcement.findByIdAndUpdate(req.params.id, req.body.announcement, function(err, updatedAnnouncement){
        if(err){

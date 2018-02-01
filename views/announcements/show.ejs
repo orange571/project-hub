@@ -16,11 +16,13 @@
                                   <img src='<%= announcement.author.picture %>' class="profile_image"/>
                                 <% } %>
                             </div>
-                            <span><em>Submitted By <%= announcement.author.username %></em></span>
+                            <span><em>Submitted By <%= announcement.author.username %>, <%= moment(announcement.createdAt).fromNow() %></em></span>
                         </div>
                         <div class="button-container">
                             <% if(currentUser && announcement.author.equals(currentUser._id)){ %>
                                 <a class="ui mini inverted blue button" href="/announcements/<%= announcement._id %>/edit">Edit</a>
+                            <% }%>  
+                            <% if(currentUser && announcement.author.equals(currentUser._id) || currentUser.isAdmin){ %>
                                 <form id="delete-form" action="/announcements/<%= announcement._id %>?_method=DELETE" method="POST">
                                     <button class="ui mini inverted red button">Delete</button>
                                 </form>
@@ -48,15 +50,17 @@
                             <div class="comment-main">
                                 <div class="comment-header">
                                     <span class="username"><strong><%= comment.author.username %></strong></span>
-                                    <span class="date">10 days ago</span>
+                                    <span class="date"><%= moment(comment.createdAt).fromNow() %></span>
                                 </div>
                                 <p>
                                     <%= comment.text %> 
                                 </p>
                                 <div class='button-container'>
-                                    <% if(currentUser && comment.author._id.equals(currentUser._id)){ %>
+                                    <% if(currentUser && comment.author._id.equals(currentUser._id)) { %>
                                         <a class="ui mini inverted blue button" 
                                            href="/announcements/<%= announcement._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                                    <% } %>
+                                    <% if(currentUser && comment.author._id.equals(currentUser._id) || currentUser.isAdmin) {%>
                                         <form id="delete-form" action="/announcements/<%= announcement._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                                             <input type="submit" class="ui mini inverted red button" value="Delete">
                                         </form>

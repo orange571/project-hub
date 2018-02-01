@@ -1,0 +1,54 @@
+<% include ../partials/portal_header %>
+    <div class="ui main" id="lib_content">
+        <div id="lib_nav">
+            This is the Nav
+            <a href="/library/verifyuser" class="ui small purple button">Verify user page</a>
+        </div> 
+        <section class="lib">
+            <% include ../partials/error_alert %>
+            <h1>Library</h1>
+             <div class="announcement_header">
+                 <h1>Welcome To Project Hub!</h1>
+                 <p>Feel Free to Add Your Item</p>
+                 <p>
+                    <a class="ui small inverted green button" href="/library/new">Add New Item</a>
+                 </p>
+             </div>
+            <div id="lib_main">
+                <div class="post_wrapper">
+                <%items.forEach(function(item){ %>
+                    <div class="post">
+                       <div class="post_content">
+                           <h4><%= item.name %></h4>
+                           <p class="shortid">ID: <%= item.shortid%></p>
+                           <p class="post_body"><%= item.description %></p>
+                           <p class="availability">
+                                    <% if(item.isAvailable === true) {%>
+                                      is Available
+                                    <% } else { %>
+                                      Not Available
+                                    <% } %>
+                           </p>
+                            <div class="author-pic-name">
+                                <div class="author-picture">
+                                    <% if(item.owner.picture == '') {%>
+                                      <i class="user circle icon"></i>
+                                    <% } else { %>
+                                      <img src='<%= item.owner.picture %>' class="profile_image"/>
+                                    <% } %>
+                                </div>
+                                <span><em>Submitted By <%= item.owner.username %>, <%= moment(item.createdAt).fromNow() %></em></span>
+                            </div>
+                           
+                       </div>
+                       <p class="button-container">
+                           <a href="/library/<%= item._id %>" class="ui mini inverted blue button">More Info</a>
+                       </p>
+                    </div>
+                <% }); %>
+            </div>
+            </div>
+            
+        </section>
+    </div>
+<% include ../partials/portal_footer %>

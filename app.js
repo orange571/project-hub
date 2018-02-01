@@ -1,5 +1,6 @@
 var express     = require("express"),
     app         = express(),
+    dotenv      = require('dotenv').config(),//environment variables
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
     flash       = require("connect-flash"),
@@ -15,7 +16,8 @@ var express     = require("express"),
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
     announcementRoutes = require("./routes/announcements"),
-    indexRoutes      = require("./routes/index")
+    indexRoutes      = require("./routes/index"),
+    libraryRoutes       = require("./routes/library")
  
 var url = process.env.DATABASEURL || "mongodb://localhost/project_hub_v1";
 mongoose.connect(url);
@@ -26,6 +28,9 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 seedDB(); //seed the database
+
+//require moment
+app.locals.moment = require('moment');
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -49,7 +54,12 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/announcements", announcementRoutes);
 app.use("/announcements/:id/comments", commentRoutes);
+app.use("/library", libraryRoutes);
 
+
+app.get('*', function(req, res){
+  res.render("404");
+});
 
 
 
