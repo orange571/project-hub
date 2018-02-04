@@ -4,6 +4,7 @@ var Item = require("../models/item");
 var User = require("../models/user");
 var middleware = require("../middleware");  
 var passport = require("passport");
+var Transaction = require("../models/transaction")
 
 //INDEX - SHOW ALL ITEMS IN LIBRARY
 router.get("/", middleware.isLoggedIn, function(req, res){
@@ -59,19 +60,138 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
    res.render("library/new", {page: "library"}); 
 }) 
 
+
+
+router.get("/verifyuser/checkout", middleware.isLoggedIn, passport.authenticate("local", 
+    {
+        session: false,
+        failureRedirect: "/library/verifyuser",
+        failureFlash: "User is not Valid",
+    }), function(req, res){
+        req.flash('success', "User " + req.query.username + " was Verified");
+        User.findOne({username: req.query.username}, function(err, foundUser) {
+            if(err) {
+                console.log(err); 
+                req.flash("error", err);
+                return res.redirect("/library");
+            } else {
+                console.log(foundUser);
+                res.redirect("/library/verifyuser/" + foundUser._id);
+            }
+        })
+        
+});
+
 router.get("/verifyuser", middleware.isLoggedIn, function(req, res) {
     res.render("library/verifyuser", {page: 'verifyuser'}); 
 });
 
-router.post("/verifyuser", middleware.isLoggedIn, passport.authenticate("local", 
-    {
-        session: false,
-        failureRedirect: "/library/verifyUser",
-        failureFlash: "User is not Valid",
-    }), function(req, res){
-        req.flash('success', "User " + req.body.username + " was Verified");
-        res.redirect("/library");
-});
+router.get("/finditem",/** middleware.isLoggedIn,**/ function(req, res) {
+    console.log(req.query.itemId);
+    Item.findById(req.query.itemId,function(err, foundItem){
+        if (err) {
+            console.log(err); 
+            req.flash("error", err);
+            res.send(err);
+        } else {
+            if(foundItem) {
+                console.log("true item found")
+                console.log(foundItem);
+                res.send(foundItem);
+            } else {
+                console.log("false item found")
+                console.log(foundItem);
+                res.send("No item matched id");
+            }
+            
+        }
+    })
+})
+
+//SHOW CHECKOUT PAGE FOR USER
+router.get("/verifyuser/:user_id",/** middleware.isLoggedIn,**/ function(req, res) {
+    User.findById(req.params.user_id, function(err, foundUser){
+        if(err) {
+            console.log(err); 
+            req.flash("error", err);
+            return res.redirect("/library");
+        } else {
+            Item.find({}).populate("owner").exec(function(err, allItems){
+               if(err){
+                    console.log(err);
+                    req.flash("error", err);
+                    return res.redirect("/library");
+               } else {
+                  res.render("library/checkout",{user:foundUser, items:allItems, page: 'library'})
+               }
+            });
+            
+        }
+    })
+})
+
+// ITEM CHECKOUT. CREATE TRANSACTION
+router.post("/verifyuser/:user_id",/** middleware.isLoggedIn, **/function(req, res){
+    console.log("You have reached the PUT verifyuser page");
+    console.log(req.body);
+    var checkoutItemList = req.body;
+    var recieptArray = [];
+    var lendeeName;
+    var librarian = res.locals.currentUser._id;
+    var lendee = req.params.user_id;
+    var itemsProcessed = 0;
+    console.log("testing create transactions route");
+    checkoutItemList.forEach(function(item){
+        var itemId = item.id;
+        var newTransaction = {item: itemId, librarian: librarian, lendee: lendee};
+        console.log("newTransaction");
+        console.log(newTransaction);
+        Transaction.create(newTransaction, function(err, newlyCreatedTransaction) {
+           if(err){
+               console.log(err);
+               recieptArray.push(err);
+               console.log("error 1");
+               console.log(recieptArray);
+           } else {
+               console.log(newlyCreatedTransaction);
+               User.findById(lendee, function(err, foundUser) {
+                   if(err) {
+                       console.log(err);
+                       console.log("error 2");
+                         console.log(recieptArray);
+                   } else {
+                       console.log("error 3");
+                        console.log(recieptArray);
+                       lendeeName = foundUser.username;
+                       foundUser.transactions.push(newlyCreatedTransaction._id);
+                       foundUser.save();
+                        itemsProcessed++;
+                       console.log("error 5");
+                       console.log(recieptArray);
+                       recieptArray.push(newlyCreatedTransaction);
+                       console.log("error 6");
+                       console.log(recieptArray);
+                       if(itemsProcessed===checkoutItemList.length) {
+                            console.log("error 7");
+                            console.log(recieptArray);
+                            res.redirect("/dashboard/" + lendee);
+                       }  
+                   }
+               });
+               Item.findById(itemId, function(err, foundItem) {
+                    if(err) {
+                       console.log(err)
+                   } else {
+                       console.log("error 4");
+                        console.log(recieptArray);
+                       foundItem.transactions.push(newlyCreatedTransaction._id);
+                   }
+               });
+           }
+        });
+    });
+    
+})
 
 // SHOW - shows more info about one item
 router.get("/:id", middleware.isLoggedIn, function(req, res){

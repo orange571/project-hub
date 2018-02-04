@@ -148,11 +148,34 @@ router.get("/calendar", middleware.isLoggedIn, function(req, res){
 });
 
 //dashboard route
-router.get("/dashboard", middleware.isLoggedIn, function(req, res){
+
+
+
+router.get("/dashboard/:id", middleware.isLoggedIn, function(req, res){
     console.log("showing dashboard page for" + res.locals.currentUser._id + " " + res.locals.currentUser.username);
+   User.
+    findById(req.params.id).
+    populate({path:"transactions", populate:{path:"item"}}).
+    exec(function(err, foundUser){
+        if(err){
+                console.log(err);
+            } else {
+                console.log("This is the User");
+                console.log(JSON.stringify(foundUser, null, "\t"))
+                //render show template with that announcement
+                console.log("This is the User");
+                res.render("dashboard", {user: foundUser, page: 'dashboard'});
+            }
+    });
    res.render("dashboard", {page: 'dashboard'}); 
 });
 
+router.get("/dashboard", middleware.isLoggedIn, function(req, res){
+    console.log("showing dashboard page for" + res.locals.currentUser._id + " " + res.locals.currentUser.username);
+   
+   
+   res.render("dashboard", {page: 'dashboard'}); 
+});
 
 //location details route
 router.get("/info", middleware.isLoggedIn, function(req, res){

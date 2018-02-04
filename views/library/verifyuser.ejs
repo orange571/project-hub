@@ -4,7 +4,7 @@
         <div class="ui container main" id="login-container">
             <% include ../partials/error_alert %>
             <h1>Login!</h1>
-            <form class="ui form" action="/library/verifyuser" method="POST">
+            <form class="ui form" action="/library/verifyuser/checkout" method="GET">
                 <div class="field">
                     <label for="username">Username</label>
                     <input type="text" name="username" placeholder="username" id="username" autofocus>

@@ -4,8 +4,8 @@ var shortid = require("shortid");
 var itemSchema = new mongoose.Schema({
     name: String,
     image: String,
-    shortid: {
-        type: String,
+    _id: {
+        type:String,
         'default': shortid.generate
     },
     description: String,
@@ -25,7 +25,7 @@ var itemSchema = new mongoose.Schema({
     transactions: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Comment"    
+            ref: "Transaction"    
         }
     ]
 });

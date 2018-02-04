@@ -23,6 +23,7 @@ var url = process.env.DATABASEURL || "mongodb://localhost/project_hub_v1";
 mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json()); // this is used for parsing the JSON object from POST
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));

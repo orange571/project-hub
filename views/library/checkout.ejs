@@ -1,0 +1,61 @@
+<% include ../partials/portal_header %>
+    <div class="ui main" id="lib_content">
+        <div id="lib_nav">
+            This is the Nav
+            <a href="/library/verifyuser" class="ui small purple button">Verify user page</a>
+        </div> 
+        <section class="lib">
+            <% include ../partials/error_alert %>
+            <h1>Library - Checkout for <%= user.username%></h1>
+             <div class="cart-container">
+                 <h1>Welcome To Project Hub!</h1>
+                 <p id="view-cart"></p>
+                 <div id="checkout-alert"></div>
+                 <p>
+                    <form id="checkout-form" action="/library/verifyuser/<%= user._id %>" method="POST">
+                        <button class="ui mini inverted green button" id="checkout-btn">Checkout</button>
+                    </form>
+                 </p>
+             </div>
+            <div id="lib_main">
+                <form id="manual-add-to-cart" action="/library/finditem" method="GET">
+                    <input type="text" id="manual-input" name="manual-input" placeholder="Item Short ID">
+                    <input type="submit" value="Submit">
+                </form>
+                <div class="post_wrapper">
+                <%items.forEach(function(item){ %>
+                    <div class="post">
+                       <div class="post_content">
+                           <h4><%= item.name %></h4>
+                           <p class="item-id">ID: <%= item._id%></p>
+                           <p class="post_body"><%= item.description %></p>
+                           <p class="availability">
+                                    <% if(item.isAvailable === true) {%>
+                                      is Available
+                                    <% } else { %>
+                                      Not Available  
+                                    <% } %>
+                           </p>
+                            <div class="author-pic-name">
+                                <div class="author-picture">
+                                    <% if(item.owner.picture == '') {%>
+                                      <i class="user circle icon"></i>
+                                    <% } else { %>
+                                      <img src='<%= item.owner.picture %>' class="profile_image"/>
+                                    <% } %>
+                                </div>
+                                <span><em>Submitted By <%= item.owner.username %>, <%= moment(item.createdAt).fromNow() %></em></span>
+                            </div>
+                           
+                       </div>
+                       <p class="button-container">
+                           <button class="ui mini inverted blue button add-to-cart" data-item-id="<%= item._id%>" data-item-name="<%= item.name%>">Add to Cart</button>
+                       </p>
+                    </div>
+                <% }); %>
+            </div>
+            </div>
+            
+        </section>
+    </div>
+<% include ../partials/checkout_footer %>

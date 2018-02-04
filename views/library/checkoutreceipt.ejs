@@ -1,0 +1,23 @@
+<% include ../partials/portal_header %>
+    <div class="ui main" id="lib_content">
+        <div id="lib_nav">
+            This is the Nav
+            <a href="/library/verifyuser" class="ui small purple button">Verify user page</a>
+        </div> 
+        <section class="lib">
+            <% include ../partials/error_alert %>
+            <h1>Library - Checkout Reciept for <%= lendeeName%></h1>
+             <div class="cart-container">
+                 <h1>Welcome To Project Hub!</h1>
+             </div>
+            <div id="lib_main">
+                <div class="receipt-container">
+                        <% reciept.forEach(function(item){ %>
+                            <p><%= item %></p>
+                        <% })%>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+<% include ../partials/portal_footer %>

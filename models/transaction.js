@@ -1,6 +1,10 @@
 var mongoose = require("mongoose");
 
 var transactionSchema = new mongoose.Schema({
+    item: {
+        type: String,
+        ref: "Item._id"
+    },
     librarian: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"        
@@ -12,10 +16,6 @@ var transactionSchema = new mongoose.Schema({
     initialDate: {
         type: Date, default: Date.now
     }, 
-    item: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Item"
-    },
     isActive: {
         type: Boolean,
         default: true
