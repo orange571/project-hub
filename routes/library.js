@@ -4,7 +4,8 @@ var Item = require("../models/item");
 var User = require("../models/user");
 var middleware = require("../middleware");  
 var passport = require("passport");
-var Transaction = require("../models/transaction")
+var Transaction = require("../models/transaction");
+var shortid = require("shortid");
 
 //INDEX - SHOW ALL ITEMS IN LIBRARY
 router.get("/", middleware.isLoggedIn, function(req, res){
@@ -17,6 +18,7 @@ router.get("/", middleware.isLoggedIn, function(req, res){
           
        }
     });
+    console.log(shortid.generate());
 });
 
 
@@ -32,6 +34,8 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     } else {
         isAvailable = false;
     }
+    var shortidString = shortid.generate();
+    console.log(shortid.generate());
     //Check for leading or trailing whitespace
     description = description.replace(/^\s+/, '').replace(/\s+$/, '');
     name = name.replace(/^\s+/, '').replace(/\s+$/, '');
@@ -40,7 +44,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         req.flash("error", "Field(s) was empty or only contained white space.");
         return res.redirect("/library/new");
     } 
-    var newItem = {name: name, owner:owner, description: description, isAvailable: isAvailable}
+    var newItem = {name: name, owner:owner, description: description, isAvailable: isAvailable, shortid: shortidString}
     console.log(newItem);
     // Create a new announcement and save to DB
     Item.create(newItem, function(err, newlyCreatedItem){
@@ -87,8 +91,8 @@ router.get("/verifyuser", middleware.isLoggedIn, function(req, res) {
 });
 
 router.get("/finditem",/** middleware.isLoggedIn,**/ function(req, res) {
-    console.log(req.query.itemId);
-    Item.findById(req.query.itemId,function(err, foundItem){
+    console.log(req.query.itemShortId);
+    Item.find({"shortid": req.query.itemShortId},function(err, foundItem){
         if (err) {
             console.log(err); 
             req.flash("error", err);

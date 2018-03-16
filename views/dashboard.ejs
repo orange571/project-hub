@@ -4,8 +4,26 @@
         <h1>Dashboard</h1>
         <section>
             <div id="lib_main">
+                <h1>Showing Transactions for <%= user.username %></h1>
                 <div class="receipt-container">
-                        <%= foundUser %>
+                    <table class="transactions">
+                        <tr>
+                            <th> Item Name </th>
+                            <th> Item ID </th>
+                            <th> Date Borrowed </th>
+                            <th> Is Active </th>
+                        </tr>
+                        <% user.transactions.forEach(function(transaction){ %>
+                            <tr>
+                                <td><%= transaction.item.name %></td>
+                                <td><%= transaction.item.shortid %></td>
+                                <td><%= moment(transaction.initialDate).tz("America/Los_Angeles").format("dddd, MMMM Do YYYY, h:mm:ss a") %></td>
+                                <td><%= transaction.isActive %></td>
+                            </tr>
+                        <% }) %>
+                        
+                    </table>    
+                    <script>console.log(moment().local().format("dddd, MMMM Do YYYY, h:mm:ss a"))</script>
                 </div>
             </div>
         </section>

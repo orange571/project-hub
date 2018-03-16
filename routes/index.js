@@ -31,6 +31,7 @@ cloudinary.config({
 
 //root route
 router.get("/", function(req, res){
+    console.log(req);
     res.render("index");
 });
 
@@ -130,6 +131,21 @@ router.put("/admin", middleware.isLoggedIn, function(req, res){
 
 });
 
+router.put("/librarian", middleware.isLoggedIn, function(req, res){
+    console.log("put request to librarian recieved");
+    if (req.body.librarianCode === process.env.DB_LIBRARIANCODE) {
+        User.findByIdAndUpdate(res.locals.currentUser._id,{isLibrarian: true}, function(err, updatedProfile){
+           if(err){
+               req.flash('error', err.message);
+               res.redirect("/profile");
+           } else {
+               res.redirect("/profile");
+           }
+        });
+    }
+
+});
+
 //locations route 
 router.get("/locations", function(req, res){
     Hub.find({}, function(err, allHubs){
@@ -167,14 +183,24 @@ router.get("/dashboard/:id", middleware.isLoggedIn, function(req, res){
                 res.render("dashboard", {user: foundUser, page: 'dashboard'});
             }
     });
-   res.render("dashboard", {page: 'dashboard'}); 
 });
 
 router.get("/dashboard", middleware.isLoggedIn, function(req, res){
-    console.log("showing dashboard page for" + res.locals.currentUser._id + " " + res.locals.currentUser.username);
-   
-   
-   res.render("dashboard", {page: 'dashboard'}); 
+    console.log("showing dashboard page for" + res.locals.currentUser._id + " " + res.locals.currentUser.username)
+   User.
+    findById(res.locals.currentUser._id).
+    populate({path:"transactions", populate:{path:"item"}}).
+    exec(function(err, foundUser){
+        if(err){
+                console.log(err);
+            } else {
+                console.log("This is the User");
+                console.log(JSON.stringify(foundUser, null, "\t"))
+                //render show template with that announcement
+                console.log("This is the User");
+                res.render("dashboard", {user: foundUser, page: 'dashboard'});
+            }
+    });
 });
 
 //location details route

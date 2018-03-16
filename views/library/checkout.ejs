@@ -27,7 +27,7 @@
                     <div class="post">
                        <div class="post_content">
                            <h4><%= item.name %></h4>
-                           <p class="item-id">ID: <%= item._id%></p>
+                           <p class="item-shortid">ID: <%= item.shortid%></p>
                            <p class="post_body"><%= item.description %></p>
                            <p class="availability">
                                     <% if(item.isAvailable === true) {%>
@@ -49,7 +49,7 @@
                            
                        </div>
                        <p class="button-container">
-                           <button class="ui mini inverted blue button add-to-cart" data-item-id="<%= item._id%>" data-item-name="<%= item.name%>">Add to Cart</button>
+                           <button class="ui mini inverted blue button add-to-cart" data-item-id="<%= item._id%>" data-item-shortid="<%= item.shortid%>" data-item-name="<%= item.name%>">Add to Cart</button>
                        </p>
                     </div>
                 <% }); %>

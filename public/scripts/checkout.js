@@ -3,12 +3,13 @@ $(function(){
     $(".add-to-cart").on("click", function (){
         var itemId = $(this)[0].dataset.itemId;
         var itemName = $(this)[0].dataset.itemName;
-        addToCart(itemId, itemName);
+        var itemShortid = $(this)[0].dataset.itemShortid;
+        addToCart(itemId, itemName, itemShortid);
     });
     
-    function addToCart(itemId, itemName) {
+    function addToCart(itemId, itemName, itemShortid) {
         $("#checkout-alert").text("");
-        var itemObject = {name:itemName, id:itemId}
+        var itemObject = {name:itemName, id:itemId, shortid: itemShortid}
         if(checkIfNotInCart(itemId)) {
             checkoutItemList.push(itemObject);
             printItemList();
@@ -54,8 +55,8 @@ $(function(){
     function printItemList () {
         var msg = "";
         checkoutItemList.forEach(function(item){
-           msg +=  "<div class='cart-item' data-item-id="+item.id+">";
-           msg += item.name + " - " + item.id ;
+           msg +=  "<div class='cart-item' data-item-id="+item.id+" data-item-shortid="+item.shortid+">";
+           msg += item.name + " - " + item.shortid ;
            msg += "<button class='ui mini red button remove-from-cart'> Remove From Cart </button>";
            msg += "</div>"
         });
@@ -82,32 +83,34 @@ $(function(){
             type: 'POST', 
             contentType: 'application/json', 
             data: checkoutListString,
-            success: function (data) {
-                console.log(data);
-                $("#checkout-alert").text(JSON.stringify(data));
+            success:function(data, code, jqXHR) {
+            window.location.pathname = "/dashboard/" + userId
             }
         });
     });
     
     $("#manual-add-to-cart").on("submit", function(event){
         event.preventDefault();
-        var itemId = $("#manual-input").val();
-        console.log(itemId);
+        var itemShortId = $("#manual-input").val();
+        console.log(itemShortId);
         $.ajax({
             url: '/library/finditem', 
             type: 'GET', 
             contentType: 'application/json', 
             data: {
-                "itemId": itemId
+                "itemShortId": itemShortId
             },
             success: function(data){
                 console.log(data);
                 if (data === "No item matched id") {
                     $("#checkout-alert").text(data);
-                } else if(data.name !== undefined) {
-                    addToCart(data._id, data.name);
+                    console.log("test1");
+                } else if(data[0].name !== undefined) {
+                    addToCart(data[0]._id, data[0].name, data[0].shortid);
+                    console.log("test2");
                 } else {
                     $("#checkout-alert").text(data);
+                    console.log("test3");
                 }
 
             }

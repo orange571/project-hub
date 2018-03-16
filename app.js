@@ -11,7 +11,8 @@ var express     = require("express"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
     Hub         = require("./models/hub"),
-    seedDB      = require("./seeds");
+    seedDB      = require("./seeds"),
+    shortid     = require("shortid");
   
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
@@ -31,7 +32,8 @@ app.use(flash());
 seedDB(); //seed the database
 
 //require moment
-app.locals.moment = require('moment');
+//app.locals.moment = require('moment');
+app.locals.moment = require('moment-timezone');
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({

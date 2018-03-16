@@ -2,8 +2,8 @@ var mongoose = require("mongoose");
 
 var transactionSchema = new mongoose.Schema({
     item: {
-        type: String,
-        ref: "Item._id"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item"
     },
     librarian: {
         type: mongoose.Schema.Types.ObjectId,

@@ -2,7 +2,9 @@
     <div class="ui main" id="lib_content">
         <div id="lib_nav">
             This is the Nav
+            <% if(currentUser.isLibrarian) {%>
             <a href="/library/verifyuser" class="ui small purple button">Verify user page</a>
+            <% }%>
         </div> 
         <section class="lib">
             <% include ../partials/error_alert %>
@@ -20,7 +22,7 @@
                     <div class="post">
                        <div class="post_content">
                            <h4><%= item.name %></h4>
-                           <p class="item-id">ID: <%= item._id%></p>
+                           <p class="item-id">ID: <%= item.shortid%></p>
                            <p class="post_body"><%= item.description %></p>
                            <p class="availability">
                                     <% if(item.isAvailable === true) {%>

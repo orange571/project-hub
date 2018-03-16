@@ -80,6 +80,22 @@ middlewareObj.isLoggedIn = function(req, res, next){
     res.redirect("/login");
 }
 
+middlewareObj.isAdmin = function(req, res, next){
+    if(res.locals.currentUser.isAdmin){
+        return next();
+    }
+    req.flash("error", "You need do not have permission to do that");
+    res.redirect("/login");
+}
+
+
+middlewareObj.isLibrarian = function(req, res, next){
+    if(res.locals.currentUser.isLibrarian){
+        return next();
+    }
+    req.flash("error", "You need do not have permission to do that");
+    res.redirect("/login");
+}
 
 middlewareObj.isSafe = function(req, res, next) {
     if(req.body.image_url.match(/^https:\/\/images\.unsplash\.com\/.*/)) {

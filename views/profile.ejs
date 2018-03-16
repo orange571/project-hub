@@ -72,7 +72,9 @@
               <% if(currentUser.isAdmin) {%>
                 , &nbsp; Admin
               <% } %>
-
+              <% if(currentUser.isLibrarian) {%>
+                , &nbsp; Librarian
+              <% } %>
             </p>
           </div>
           
@@ -80,6 +82,13 @@
             <h3>Admin Code:</h3>
             <form action="/admin?_method=PUT" method="POST">
               <label>Enter Admin Code: <input type="text" name="adminCode"></label>
+              <input type="submit">
+            </form>
+          </div>
+          <div class="profile_items">
+            <h3>Librarian Code:</h3>
+            <form action="/librarian?_method=PUT" method="POST">
+              <label>Enter Librarian Code: <input type="text" name="librarianCode"></label>
               <input type="submit">
             </form>
           </div>

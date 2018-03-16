@@ -385,3 +385,13 @@ footer.ui.segment{
 .ui.toggle.checkbox input:focus:checked~label{
     color:#fff !important;
 }
+
+
+table.transactions, table.transactions tr, table.transactions td, table.transactions th {
+  border: 2px solid #fff;
+  border-collapse: collapse;
+}
+
+table.transactions td, table.transactions th {
+  padding: 5px;
+}

@@ -8,6 +8,7 @@ var UserSchema = new mongoose.Schema({
     picture: { type: String, default: '' },
     my_locations: [String],
     isAdmin: {type: Boolean, default: false},
+    isLibrarian: {type: Boolean, default: false},
     transactions: [
         {
             type: mongoose.Schema.Types.ObjectId,

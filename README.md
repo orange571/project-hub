@@ -10,6 +10,11 @@ Use this command to start up mongodb
 -add item form
 -create transactions schema
 -create library page with items, add checkout button if 
+-2/3 Find out how to convert utc time to client timezone --done 2/5 Using jquery front-end todate, to locale string
+-Only able to checkout if isAvailable
+-return item feature
+
+
 
 #LOG
 1/26 Added Dynamic Profile Picture

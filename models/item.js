@@ -1,13 +1,9 @@
 var mongoose = require("mongoose");
-var shortid = require("shortid");
 
 var itemSchema = new mongoose.Schema({
     name: String,
     image: String,
-    _id: {
-        type:String,
-        'default': shortid.generate
-    },
+    shortid: String,
     description: String,
     owner: {
         type: mongoose.Schema.Types.ObjectId,
